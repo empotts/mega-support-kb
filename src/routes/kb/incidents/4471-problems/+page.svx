@@ -4,7 +4,7 @@ title: '#4471 · what the merged reports show'
 owner: Ethan Potts
 status: open
 reviewed: 2026-10-28
-signature: Ethan Potts
+signature: empotts
 ---
 
 <script>
