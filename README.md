@@ -38,5 +38,5 @@ Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
 ## Build
 
 `npm install`, then `npm run build` (static site in `build/`) or `npm run dev`. `rendered/` holds the
-built site as the desk sees it; open `rendered/kb/incidents/4471/problems.html` through
+built site as the desk sees it; open `rendered/kb/incidents/4471-problems.html` through
 `npx vite preview` so its assets load.
