@@ -13,14 +13,14 @@ signature: empotts
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
-[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. The reports merged into it
+[#4471](/kb/incidents/4471) was marked known: one issue, one fix queued. It closed on 5 October. The reports merged into it
 say otherwise. They were merged on subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)),
 and a subject like "Wrong date again" says nothing about the cause. Read by tenant and by the way the
 report came in, the ticket holds more than one bug.
 
 <Callout kind="warn">
-The parser fix queued for #4471 fixes only the <code>parser</code> row. The other problems stay
-after it ships.
+Engineering update, #4471 closed 05 Oct: <code>parser</code> is fixed (<code>fix(dates): parse dd/mm for eu locales</code>).
+<code>hint</code> won't be fixed: the booking-v3 form is retired.
 </Callout>
 
 ## What #4471 holds
@@ -38,12 +38,13 @@ after it ships.
   first, so day and month swap ("4 March turned into 3 April").
 - **`one-day`:** the reports the desk read as a one-day move (`desk-notes.json`). The date is off by
   one day, not swapped: "Tuesday 6 October showed as Monday", "Client in Lisbon got Tuesday. Client
-  in Toronto got Monday." That is a time-zone shift. The parser fix does not touch it.
+  in Toronto got Monday." That is a time-zone shift. The desk files these under `parser` by tenant.
 
 ## Tickets
 
 Each problem has its own ticket in [empotts/mega-support-kb](https://github.com/empotts/mega-support-kb/issues),
-with the count of reports it covers. #4471 should stay with `parser` only.
+with the count of reports it covers, the desk's way. All are closed: #1 fixed, #2 not planned
+(form retired), #3 a duplicate of #1, because the desk files one-day moves under `parser`.
 
 ## Lessons
 
