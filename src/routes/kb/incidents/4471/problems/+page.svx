@@ -1,0 +1,53 @@
+---
+layout: runbook
+title: '#4471 · what the merged reports show'
+owner: Ethan Potts
+status: open
+reviewed: 2026-10-28
+signature: Ethan Potts
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. The reports merged into it
+say otherwise. They were merged on subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)),
+and a subject like "Wrong date again" says nothing about the cause. Read by tenant and by the way the
+report came in, the ticket holds more than one bug.
+
+<Callout kind="warn">
+The parser fix queued for #4471 fixes only the <code>parser</code> row. The other problems stay
+after it ships.
+</Callout>
+
+## What #4471 holds
+
+<ProblemTable ticket={4471} />
+
+## How each report is placed
+
+- **One report per id.** The ticket export comes in overlapping pages, so some rows repeat.
+- **By tenant, not by intake's tag.** Intake guesses from the reporter's browser. The cause depends
+  on the tenant's locale and booking form (`#lib/kb/causes`). Every tenant on file writes the day first.
+- **`hint`:** a report sent through a `booking-v3` form. That form prints `MM/DD/YYYY` under its
+  date field, people type the month first, and the form reads the day first.
+- **`parser`:** every other report from a day-first tenant. The shared parser reads the date month
+  first, so day and month swap ("4 March turned into 3 April").
+- **`one-day`:** the reports the desk read as a one-day move (`desk-notes.json`). The date is off by
+  one day, not swapped: "Tuesday 6 October showed as Monday", "Client in Lisbon got Tuesday. Client
+  in Toronto got Monday." That is a time-zone shift. The parser fix does not touch it.
+
+## Tickets
+
+Each problem has its own ticket in [empotts/mega-support-kb](https://github.com/empotts/mega-support-kb/issues),
+with the count of reports it covers. #4471 should stay with `parser` only.
+
+## Lessons
+
+- A subject line names a symptom, not a cause. Merging on subject alone hid two bugs inside one ticket.
+- Count by cause, from the data, before you write "known".
+
+<RenderStamp {signature} />
