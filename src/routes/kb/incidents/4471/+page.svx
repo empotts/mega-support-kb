@@ -22,6 +22,9 @@ first. The fix is queued.
 Known. One issue, one fix queued.
 </Callout>
 
+**Update:** the merged reports hold more than one problem. See
+[#4471 · what the merged reports show](/kb/incidents/4471-problems).
+
 ## What was merged
 
 <CauseTable ticket={4471} />
